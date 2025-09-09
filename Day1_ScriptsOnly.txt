@@ -1,10 +1,10 @@
 FIND AND REPLACE THE FOLLOWING - From # to #
 
 ! Monitor Num:      82
-! Cam6 Mac Add:     #camera6macadd#
-! Cam8 Mac Add:     #camera8macadd#
-! Ephone 1 Mac: 	#ephone1macadd#
-! Ephone 2 Mac: 	#ephone2macadd#
+! Cam6 Mac Add fa0/6:     001a.0709.bce9
+! Cam8 Mac Add fa0/8:     001a.0709.c633
+! Ephone 1 Mac fa0/5: 	ccd8.c1fb.10b9
+! Ephone 2 Mac fa0/7: 	204c.9e6c.e263
 ! YourPhone Mac:	#mym0bilemac#
 ! OtherPhone Mac:	#othm0bilemac#
 
@@ -173,10 +173,10 @@ conf t
  ip routing
  ip dhcp pool CAMERA6
   host 10.82.50.6 255.255.255.0
-  client-identifier #camera6macadd#
+  client-identifier 001a.0709.bce9
  ip dhcp pool CAMERA8
   host 10.82.50.8 255.255.255.0
-  client-identifier #camera8macadd#
+  client-identifier 001a.0709.c633
  end
 
 !@default route Corebaba
@@ -257,12 +257,12 @@ conf t
  ephone-dn 8
   number 8288
  ephone 1
-  mac-address #ephone1macadd#
+  mac-address ccd8.c1fb.10b9
   type 8945
   button 1:1 2:2 3:3 4:4
   restart
  ephone 2
-  mac-address #ephone2macadd#
+  mac-address 204c.9e6c.e263
   type 8945
   button 1:5 2:6 3:7 4:8
   restart
@@ -353,6 +353,14 @@ conf t
  dial-peer voice 82 Voip
   destination-pattern 82..
   session target ipv4:10.82.100.8
+  codec g711ULAW
+dial-peer voice 91 Voip
+  destination-pattern 91..
+  session target ipv4:10.91.100.8
+  codec g711ULAW
+dial-peer voice 92 Voip
+  destination-pattern 92..
+  session target ipv4:10.92.100.8
   codec g711ULAW
  end
 
@@ -583,4 +591,5 @@ conf t
 conf t
  class-map voip
   match ip dscp  ?
+
 
